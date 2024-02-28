@@ -18,14 +18,32 @@ while True:
 
     elif opc == 2:
         inserir(pendentes, 'Editar')
-        
-        opc = gerenciador.menu('Tarefas Pendentes', exibir(pendentes), 'Marcar como concluída: ')
+        inserir(pendentes, 'Voltar')
 
+        while True:
+            opc = gerenciador.menu('Tarefas Pendentes', exibir(pendentes), 'Marcar como concluída: ')
+
+            
+            if exibir(pendentes)[opc-1] == exibir(pendentes)[-1]:
+                break
+
+
+            elif exibir(pendentes)[opc-1] == exibir(pendentes)[-2]:
+                editar(pendentes, leiaint('Editar qual tarefa? ', gerenciador.num_opc-2)-1, input('Qual a nova tarefa? ')+'\n')
+                print('Tarefa editada com sucesso')
+            
+
+            else:
+                inserir(concluidas, exibir(pendentes)[opc-1].replace('\n', ''))
+                editar(pendentes, opc-1)
+        editar(pendentes, -2)
         editar(pendentes, -1)
-
     
     elif opc == 3:
-        gerenciador.exibe_lista('Tarefas concluídas', exibir(concluidas))
+        try:
+            gerenciador.exibe_lista('Tarefas concluídas', exibir(concluidas))
+        except:
+            print('Nenhuma tarefa concluída ainda')
 
 
     elif opc == 4:

@@ -14,6 +14,8 @@ class formatar():
         self.cabecalho(tittle)
         self.num_opc = len(items)
         for i, v in enumerate(items):
+            if v.replace('\n', '') == 'Editar':
+                print('-'*35)
             print(f'[ {i+1} ] {v.replace('\n', '')}')
         print('-'*35)
         return leiaint(msg, self.num_opc)
@@ -22,7 +24,7 @@ class formatar():
     def exibe_lista(self, tittle='Lista', items=list):
         self.cabecalho(tittle)
         for v in items:
-            print(v)
+            print(v.replace('\n', ''))
         print('-'*35)
         input('Pressione ENTER para voltar...')
 

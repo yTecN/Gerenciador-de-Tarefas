@@ -18,7 +18,7 @@ def exibir(nome_arquivo):
 
 
 def inserir(nome_arquivo, item):
-    with open(nome_arquivo, 'a+', encoding='UTF-8') as file:
+    with open(nome_arquivo, 'a', encoding='UTF-8') as file:
         file.write(item+'\n')
         file.seek(0, 2)
 
