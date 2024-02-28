@@ -12,17 +12,25 @@ def leiaint(msg=str, max=1):
                 return int(n)
 
 
-# def cria_pendentes():
-#     pass
+def exibir(nome_arquivo):
+    with open(nome_arquivo, 'r', encoding='UTF-8') as file:
+        return file.readlines()
 
 
-# def cria_concluidas():
-#     pass
+def inserir(nome_arquivo, item):
+    with open(nome_arquivo, 'a+', encoding='UTF-8') as file:
+        file.write(item+'\n')
+        file.seek(0, 2)
 
 
-# def adiciona():
-#     pass
+def editar(nome_arquivo, numero_linha, novo_item=''):
+    with open(nome_arquivo, 'r') as file:
+        lines = file.readlines()
 
 
-# def remove():
-#     pass
+    with open(nome_arquivo, 'w') as file:
+        for index, line in enumerate(lines, start=1):
+            if lines[numero_linha] == line:
+                file.write(novo_item)
+            else:
+                file.write(line)

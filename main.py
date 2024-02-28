@@ -2,7 +2,8 @@ import lib.formatar as formatar
 from lib.logica import *
 
 gerenciador = formatar.formatar()
-gerenciador.pendentes = ['Lavar louça', 'Tomar banho', 'Guardar louça', 'Voltar']
+pendentes = 'pendentes.txt'
+concluidas = 'concluidas.txt'
 
 
 while True:
@@ -11,37 +12,20 @@ while True:
     # Adicionar Tarefa
 
     if opc == 1:
-        gerenciador.pendentes.insert(-1, input('Digite a nova tarefa: ').strip())
+        inserir(pendentes, input('Digite a nova tarefa: '))
         print('Tarefa adicionada com sucesso')
 
 
     elif opc == 2:
-        gerenciador.pendentes.insert(-1, 'Editar lista')
-        while True:
-            opc = gerenciador.menu('Tarefas Pendentes', gerenciador.pendentes, 'Marcar como concluída: ')
-            if opc-1 == gerenciador.pendentes.index('Voltar'):
-                break
-            elif opc-1 == gerenciador.pendentes.index('Editar lista'):
-                task = leiaint('Qual tarefa você deseja editar? ', len(gerenciador.pendentes))
-                gerenciador.pendentes[task-1] = input('Nova tarefa: ')
-            else:
-                gerenciador.concluidas.append(gerenciador.pendentes[opc-1])
-                gerenciador.pendentes.pop(opc-1)
-        gerenciador.pendentes.pop(gerenciador.pendentes.index('Editar lista'))
-    
-    # elif opc == 3:
-    #         gerenciador.pendentes[-1] = 'Cancelar'
-    #         opc = gerenciador.menu('Tarefas Pendentes', gerenciador.pendentes, 'Selecione para editar: ')
-    #         if gerenciador.pendentes[opc-1] == gerenciador.pendentes[-1]:
-    #             pass
-    #         else:
-    #             gerenciador.pendentes[opc-1] = input('Nova Tarefa: ')
-    #             print('Alterado com sucesso')
-    #         gerenciador.pendentes[-1] = 'Voltar'
+        inserir(pendentes, 'Editar')
+        
+        opc = gerenciador.menu('Tarefas Pendentes', exibir(pendentes), 'Marcar como concluída: ')
+
+        editar(pendentes, -1)
 
     
     elif opc == 3:
-        gerenciador.exibe_lista('Tarefas concluídas', gerenciador.concluidas)
+        gerenciador.exibe_lista('Tarefas concluídas', exibir(concluidas))
 
 
     elif opc == 4:
